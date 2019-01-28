@@ -1,4 +1,4 @@
-// Create array of topics in strings
+// / Create array of topics in strings
 
 var topics = [
     "Dogs",
@@ -20,16 +20,8 @@ var topics = [
 
 ];
 
-function renderButtons() {
-    for (var i = 0; i < topics.length; i++) {
-        var a = $("<button>");
-        a.addClass("topics");
-        a.attr("data-name", topics[i]);
-        a.text(topics[i]);
-        $("#buttons-view").append(a);
-        
-    }
-}
+
+renderButtons();
 
 function alertTopicName() {
     var topics = $(this).attr("data-name");
@@ -37,41 +29,54 @@ function alertTopicName() {
     console.log(topics);
 }
 
+function renderButtons() {
+    $("#buttons-view").empty();
 
+    for (var i = 0; i < topics.length; i++) {
+        var a = $("<button>");
+        a.addClass("topics");
+        a.attr("data-name", topics[i]);
+        a.text(topics[i]);
+        $("#buttons-view").append(a);
+    };
+};
 
 $("#add-topic").on("click", function (event) {
     event.preventDefault();
     var topic = $("#topic-input").val().trim();
-    topics.push(topics);
-   
+    // console.log(topic);
+    topics.push(topic);
+    // console.log(topic);
+    renderButtons();
 });
 
-$(document).on("click", ".topics", alertTopicName);
-renderButtons();
+// I don't think lines 56 & 57 are working properly
 
+$('#buttons-view').on('click', ".topics", function () {
+    // console.log("button clicked!");
+    var searchTopic = $(this).attr("data-name");
+    console.log(searchTopic);
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchTopic + "&api_key=dc6zaTOxFJmzC&limit=10";
+    console.log(queryURL);
+    
 
-var queryURL = "https://api.giphy.com/v1/gifs/search?q=trent+reznor&limit=10&rating=pg&api_key=uUNE7Q3A6C6PVuGwdTyE8Qkn0EXnEZnU";
-
-$.ajax({
-    url: queryURL,
-    method: 'GET'
-}).then(function (response) {
-    // console.log(response);
-})
-
+    $.ajax({
+        url: queryURL,
+        method: 'GET'
+    }).then(function (response) {
+        console.log(response);
+    });
+});
 
 
 // Dynamically turn them into buttons on my webpage
-//  {
-//      $("#topics-list").append("<button>" + topics[i] + "</button>");
-//  }
 
 // When the user clicks a button, 10 static gifs should appear from API with rating displayed
-// $('button').on('click', function () {
-//     console.log("button clicked!");
-// })
+
 // When giphy images is clicked, gif should animate
+
 // When gif is clicked again, gif should stop
+
 
 
 
