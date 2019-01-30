@@ -1,0 +1,30 @@
+.btn {
+    margin: 5px;
+}
+.btn-sage {
+    background-color: #3dbbb5;
+}
+
+#add-topic {
+    background-color: #3dbbb5;
+}
+
+.gif-container{
+    display: inline-block;
+}
+
+#div {
+    background-color: yellow;
+    padding: 20px;
+    display: none;
+    text-align: center
+  }
+
+span:hover+#div {
+    display: block;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
